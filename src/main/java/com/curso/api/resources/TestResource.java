@@ -1,16 +1,21 @@
-package com.curso.api.controllers;
+package com.curso.api.resources;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
-public class TestController {
+@RequestMapping("/teste")
+public class TestResource {
 
 	@GetMapping(value = "/oi")
 	public String getOi() {
-		return "Oi pessoal";
+		return "Oi Pessoal!";
+	}
+	
+	@GetMapping("/ola")
+	public String getOla() {
+		return "Ola Pessoal!";
 	}
 	
 }
