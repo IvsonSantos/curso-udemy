@@ -12,7 +12,4 @@ public class CursoDTO implements Serializable {
 
 	private String area;
 
-
-
-
 }

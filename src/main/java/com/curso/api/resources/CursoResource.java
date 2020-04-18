@@ -28,13 +28,13 @@ public class CursoResource {
 		return ResponseEntity.ok().body(lista); 
 	}
 	
-//	@PostMapping("/salva")
-//	public ResponseEntity<Curso> saveCurso(@RequestBody Curso curso) throws URISyntaxException {
-//		
-//		Curso novoCurso = cursoService.save(curso);
-//		
-//		return ResponseEntity.created(new URI("/cursos/salva/" + novoCurso.getId()))
-//							 .body(novoCurso);
-//	}
+	@PostMapping("/salva")
+	public ResponseEntity<Curso> saveCurso(@RequestBody Curso curso) throws URISyntaxException {
+		
+		Curso novoCurso = cursoService.save(curso);
+		
+		return ResponseEntity.created(new URI("/cursos/salva/" + novoCurso.getId()))
+							 .body(novoCurso);
+	}
 	
 }
