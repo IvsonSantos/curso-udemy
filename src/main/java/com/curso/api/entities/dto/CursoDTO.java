@@ -2,14 +2,24 @@ package com.curso.api.entities.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+
 public class CursoDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 
+	@NotNull
+	@NotEmpty(message = "O nome está vazio")
+	@Size(min = 5, max = 20)
 	private String nome;
 
+	@NotBlank
 	private String area;
 	
 	public CursoDTO() {
