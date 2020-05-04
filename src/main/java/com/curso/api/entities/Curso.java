@@ -72,12 +72,14 @@ public class Curso implements Serializable {
 
 	public Curso() {
 		// TODO Auto-generated constructor stub
+		this.valorDoCurso = new BigDecimal(0);
 	}
 
 	public Curso(String nome, String area) {
 		super();
 		this.nome = nome;
 		this.area = area;
+		this.valorDoCurso = new BigDecimal(0);
 	}
 
 	public Integer getId() {
