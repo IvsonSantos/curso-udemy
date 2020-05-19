@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,16 +38,6 @@ public class CursoResource {
 		return ResponseEntity.ok().body(lista); 
 	}
 	
-	@PostMapping("/salva")
-	public ResponseEntity<Curso> saveCurso(
-			@Valid @RequestBody CursoDTO dto) throws URISyntaxException {
-		
-		Curso novoCurso = cursoService.save(mapper.mapCursoDTOToCurso(dto));
-		
-		return ResponseEntity.created(new URI("/cursos/salva/" + novoCurso.getId()))
-							 .body(novoCurso);
-	}
-	
 	@GetMapping("/{id}")
 	public ResponseEntity<Curso> findCurso(@PathVariable Integer id) {
 		Curso curso = cursoService.findById(id);
@@ -55,11 +46,28 @@ public class CursoResource {
 	
 	@GetMapping("/nome")
 	public ResponseEntity<List<Curso>> findCursoByNome(@RequestParam String valor) {
-		
-		System.out.println("Nome a pesquisar: " + valor);
-		
 		List<Curso> cursos = cursoService.findByNome(valor);
-		
 		return ResponseEntity.ok().body(cursos);
 	}
+	
+	@PostMapping
+	public ResponseEntity<Curso> saveCurso(
+			@Valid @RequestBody CursoDTO dto) throws URISyntaxException {
+		Curso novoCurso = cursoService.save(mapper.mapCursoDTOToCurso(dto));
+		return ResponseEntity.created(new URI("/cursos/salva/" + novoCurso.getId())).body(novoCurso);
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Curso> updateCurso(@Valid @RequestBody CursoDTO dto, @PathVariable Integer id) 
+			throws URISyntaxException {
+		
+		Curso novo = mapper.mapCursoDTOToCurso(dto);
+		novo.setId(id);
+		cursoService.update(novo);
+		return ResponseEntity.noContent().build();
+	}
+	
+	
+	
+	
 }
